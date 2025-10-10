@@ -1,0 +1,54 @@
+{
+  "programming": [
+    {
+      "title": "Flag Game",
+      "short_description": "learning flags",
+      "img": "assets/flag-game.png"
+    },
+    {
+      "title": "ITN Rechner",
+      "short_description": "calculate your ITN",
+      "img": "assets/itn-rechner.png"
+    },
+    {
+      "title": "Reservierungssystem",
+      "img": "assets/reservationssystem.png"
+    },
+    {
+      "title": "Easy Learning",
+      "short_description": "learning app",
+      "img": "assets/easy-learning.png"
+    },
+    {
+      "title": "Chess",
+      "short_description": "play chess",
+      "img": "assets/chess.png"
+    },
+    {
+      "title": "Tetris",
+      "short_description": "classic tetris game",
+      "img": "assets/tetris.png"
+    }
+  ],
+  "filming": [
+    {
+      "title": "NO TOMORROW",
+      "short_description": "time paradox movie",
+      "img": "assets/notomorrow.jpg"
+    },
+    {
+      "title": "REVENGE",
+      "short_description": "action short film",
+      "img": "assets/revenge.jpg"
+    },
+    {
+      "title": "Der Geisterjäger",
+      "short_description": "thriller short film",
+      "img": "assets/geisterjäger.jpg"
+    },
+    {
+      "title": "Lego Stop Motion",
+      "img": "assets/stopmotion.jpg"
+    }
+  ]
+}

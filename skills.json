@@ -1,0 +1,112 @@
+[
+  {
+    "name": "HTML",
+    "started": "09-2020",
+    "icon": "logos/html.png"
+  },
+  {
+    "name": "CSS",
+    "started": "09-2020",
+    "icon": "logos/css.png"
+  },
+  {
+    "name": "SCSS",
+    "started": "09-2022",
+    "icon": "logos/scss.png"
+  },
+  {
+    "name": "JavaScript",
+    "started": "09-2021",
+    "icon": "logos/javascript.png"
+  },
+  {
+    "name": "TypeScript",
+    "started": "09-2022",
+    "icon": "logos/typescript.png"
+  },
+  {
+    "name": "Node JS",
+    "started": "09-2021",
+    "icon": "logos/nodejs.png"
+  },
+  {
+    "name": "PHP",
+    "started": "09-2022",
+    "icon": "logos/php.png"
+  },
+  {
+    "name": "Angular",
+    "started": "09-2023",
+    "icon": "logos/angular.png"
+  },
+
+  {
+    "name": "Java",
+    "started": "09-2020",
+    "icon": "logos/java.png"
+  },
+  {
+    "name": "Quarkus",
+    "started": "09-2023",
+    "icon": "logos/quarkus.png"
+  },
+  {
+    "name": "SQL",
+    "started": "09-2022",
+    "icon": "logos/sql.png"
+  },
+
+  {
+    "name": "Github",
+    "started": "09-2022",
+    "icon": "logos/github.png"
+  },
+  {
+    "name": "Premiere Pro",
+    "started": "09-2020",
+    "icon": "logos/premierepro.png"
+  },
+  {
+    "name": "Photoshop",
+    "started": "09-2020",
+    "icon": "logos/photoshop.png"
+  },
+  {
+    "name": "Lightroom",
+    "started": "09-2024",
+    "icon": "logos/lightroom.png"
+  },
+  {
+    "name": "After Effects",
+    "started": "09-2021",
+    "icon": "logos/aftereffects.png"
+  },
+  {
+    "name": "Audition",
+    "started": "09-2022",
+    "icon": "logos/audition.png"
+  },
+  {
+    "name": "Illustrator",
+    "started": "09-2023",
+    "icon": "logos/illustrator.png"
+  },
+
+  {
+    "name": "Docker",
+    "started": "09-2023",
+    "icon": "logos/docker.png"
+  },
+
+  {
+    "name": "Davinci Resolve",
+    "started": "09-2024",
+    "icon": "logos/davinciresolve.png"
+  },
+
+  {
+    "name": "Cinema 4D",
+    "started": "09-2023",
+    "icon": "logos/cinema4d.png"
+  }
+]

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="script.js" defer></script>
+    <script src="https://kit.fontawesome.com/557f0c19d3.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav>
+        <a href="#about" class="nav-link active">About</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#gallery" class="nav-link">Gallery</a>
+    </nav>
+
+    <header id="about">
+        <div class="left">
+            <div>
+                <h3>Hi There! I'm</h3>
+                <h1>MICHAEL LEISCH</h1>
+            </div>
+
+            <div class="image">
+                <img src="assets/profil.png" alt="">
+
+                <div>
+                    <i class="fa-brands fa-youtube"></i>
+                    <a href="https://www.instagram.com/michi_leisch">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="https://github.com/Michiii11">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+
+                    <a href="mailto:michael.leisch@gmx.at">
+                        <i class="fa-solid fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="right">
+        </div>
+    </header>
+
+
+    <section id="projects">
+        <h2>PROJECTS</h2>
+
+        <div class="nav">
+            <div class="active" onclick="selectCategory(this, 'programming')">
+                <i class="fa-solid fa-code"></i>
+                <p>Programming</p>
+                <p></p>
+            </div>
+            <div onclick="selectCategory(this, 'filming')">
+                <i class="fa-solid fa-video"></i>
+                <p>Filming</p>
+                <p></p>
+            </div>
+        </div>
+
+        <div class="projects">
+
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>SKILLS</h2>
+
+        <div class="skills"></div>
+    </section>
+
+    <section id="gallery">
+        <h2>GALLERY</h2>
+
+        <div class="nav gallery-nav">
+            <div class="nav-btn active" data-category="photography">
+                <i class="fa-solid fa-camera"></i>
+                <p>Photography</p>
+                <p></p>
+            </div>
+            <div class="nav-btn" data-category="personal">
+                <i class="fa-solid fa-user"></i>
+                <p>Personal</p>
+                <p></p>
+            </div>
+        </div>
+
+        <div class="gallery">
+
+        </div>
+    </section>
+</body>
+</html>
