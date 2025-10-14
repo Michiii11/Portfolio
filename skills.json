@@ -93,16 +93,18 @@
   },
 
   {
+    "name": "Davinci Resolve",
+    "started": "09-2024",
+    "icon": "logos/davinciresolve.png"
+  },
+
+  {
     "name": "Docker",
     "started": "09-2023",
     "icon": "logos/docker.png"
   },
 
-  {
-    "name": "Davinci Resolve",
-    "started": "09-2024",
-    "icon": "logos/davinciresolve.png"
-  },
+
 
   {
     "name": "Cinema 4D",

@@ -19,12 +19,11 @@
     </nav>
 
     <header id="about">
-        <div class="left">
-            <div>
-                <h3>Hi There! I'm</h3>
-                <h1>MICHAEL LEISCH</h1>
-            </div>
-
+        <div>
+            <h3>Hi There! I'm</h3>
+            <h1>MICHAEL LEISCH</h1>
+        </div>
+        <div class="bottom">
             <div class="image">
                 <img src="assets/profil.png" alt="">
 
@@ -43,9 +42,27 @@
                     </a>
                 </div>
             </div>
-        </div>
 
-        <div class="right">
+            <div class="right">
+                <p>
+                    Hi! My name is <strong>Michael Leisch</strong>, and I’m <strong><span id="alter"></span> years old</strong>.
+                    I graduated from <strong>HTL Leonding</strong>, specializing in <strong>Media Technology and IT</strong>.
+                </p>
+
+                <p>
+                    I’m currently a <strong>videographer in the Austrian Armed Forces</strong>, where I capture and edit stories through film.
+                    While I enjoy filmmaking, my main focus lies in <strong>software development and creative problem-solving</strong>.
+                </p>
+
+                <p>
+                    I love building projects that combine technology and design — turning ideas into functional, purposeful solutions.
+                    I’ve already developed several apps and media projects that reflect my passion for innovation.
+                </p>
+
+                <p>
+                    Outside of tech, I enjoy playing <strong>tennis</strong> and look forward to starting my <strong>college tennis journey in fall 2026</strong>.
+                </p>
+            </div>
         </div>
     </header>
 
@@ -54,12 +71,12 @@
         <h2>PROJECTS</h2>
 
         <div class="nav">
-            <div class="active" onclick="selectCategory(this, 'programming')">
+            <div onclick="selectCategory(this, 'programming')">
                 <i class="fa-solid fa-code"></i>
                 <p>Programming</p>
                 <p></p>
             </div>
-            <div onclick="selectCategory(this, 'filming')">
+            <div class="active" onclick="selectCategory(this, 'filming')">
                 <i class="fa-solid fa-video"></i>
                 <p>Filming</p>
                 <p></p>
@@ -81,7 +98,7 @@
         <h2>GALLERY</h2>
 
         <div class="nav gallery-nav">
-            <div class="nav-btn active" data-category="photography">
+            <div class="nav-btn" data-category="photography">
                 <i class="fa-solid fa-camera"></i>
                 <p>Photography</p>
                 <p></p>

@@ -14,7 +14,7 @@ section, header {
   scroll-margin-top: 70px;
 }
 
-nav {
+nav{
   position: fixed;
   top: 0;
   left: 0;
@@ -22,9 +22,6 @@ nav {
   z-index: 1000;
   background-color: $gray100;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-nav{
   display: flex;
   justify-content: end;
   gap: 2rem;
@@ -38,7 +35,7 @@ nav{
     text-decoration: none;
     color: $gray700;
 
-    &.active{
+    &.active, &.selected{
       font-weight: 600;
       color: $accent;
     }
@@ -70,9 +67,10 @@ h3{
 
 header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   margin-inline: 10vw;
-  height: 80vh;
+  min-height: 80vh;
+  gap: 5vh;
 
   div {
     display: flex;
@@ -90,7 +88,7 @@ header {
   align-items: center;
 
   img{
-    width: 20vw;
+    width: 20rem;
     aspect-ratio: 1/1;
     border-radius: 1rem;
   }
@@ -108,7 +106,7 @@ header {
     justify-content: center;
     align-items: center;
 
-    width: 3vw;
+    width: 3rem;
     aspect-ratio: 1/1;
     border-radius: .8rem;
     transition: all .2s ease;
@@ -166,13 +164,14 @@ section{
     display: flex;
     justify-content: center;
     gap: 3rem;
+    margin-inline: .5rem;
     font-size: 1.5rem;
 
     div{
       display: flex;
       justify-content: space-between;
       cursor: pointer;
-      width: 20%;
+      width: 20rem;
       flex-direction: row;
       align-items: center;
       padding: .5rem 1rem;
@@ -182,7 +181,7 @@ section{
       color: $contrast;
       transition: .2s ease all;
 
-      &.active{
+      &.active, &.selected{
         background-color: $accent;
       }
 
@@ -208,6 +207,11 @@ section{
   padding: 1rem;
   border-radius: .5rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+  div{
+    display: flex;
+    gap: .5rem;
+  }
 
   img{
     width: 100%;
@@ -240,20 +244,173 @@ section{
 }
 
 .skill{
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: .5rem;
   align-items: center;
   background-color: $gray200;
   border-radius: .5rem;
   padding: 2rem .5rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  /*cursor: pointer;*/
 
   p{
     font-size: 1.25rem;
   }
 
+
+  div.skill-inner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 90%;
+    height: 90%;
+  }
+
+  div{
+    display: flex;
+    align-items: center;
+    min-height: 80%;
+    width: 60%;
+  }
+
   img{
-    width: 50%;
+    width: 100%;
+  }
+}
+
+@keyframes popBack {
+  0% { transform: scale(0.8) rotateY(180deg);}
+  60% { transform: scale(1.08) rotateY(180deg);}
+  100% { transform: scale(1) rotateY(180deg);}
+}
+
+.bottom{
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  gap: 5vw;
+}
+
+.right {
+  background: $gray200;
+  border-radius: 1.2rem;
+  padding: 1rem 1.5em;
+  margin: 0 auto;
+  color: #D9D9D9;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.right h2 {
+  font-size: 2.2em;
+  font-weight: 700;
+  color: #94EA6B;
+  margin-bottom: 24px;
+  text-align: center;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 12px #94EA6B44;
+}
+
+.right p {
+  margin-bottom: 1.2em;
+}
+
+.right strong {
+  color: #94EA6B;
+  font-weight: 700;
+}
+
+
+.gallery{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2vw;
+  margin-inline: 10vw;
+
+  img{
+    width: 100%;
+    border-radius: .5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform .2s ease;
+    cursor: pointer;
+
+    &:hover{
+      transform: scale(1.05);
+    }
+  }
+}
+
+
+
+
+@media (max-width: 1200px) {
+  .bottom{
+    flex-direction: column;
+    align-items: start;
+    gap: 5vh;
+  }
+
+  .projects{
+    grid-template-columns: 1fr;
+    margin-inline: 15vw;
+  }
+
+  .skills{
+    width: 90%;
+    margin-inline: auto;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .gallery{
+    width: 90%;
+    margin-inline: auto;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 800px){
+  .skills{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px){
+  .projects{
+    width: 90%;
+    margin-inline: auto;
+  }
+  .gallery{
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (max-width: 450px){
+  .image{
+    flex-direction: column;
+
+    div{
+      flex-direction: row;
+    }
+  }
+
+  .skills{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  section .nav{
+    gap: 1rem;
+
+    div{
+      justify-content: center;
+    }
+
+    i{
+      display: none;
+    }
   }
 }

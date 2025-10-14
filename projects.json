@@ -3,52 +3,124 @@
     {
       "title": "Flag Game",
       "short_description": "learning flags",
-      "img": "assets/flag-game.png"
+      "img": "assets/flag-game.png",
+      "links": [
+        {
+          "name": "Code",
+          "url": "https://github.com/Michiii11/Flags"
+        },
+        {
+          "name": "Play it",
+          "url": "https://learnflags.netlify.app"
+        }
+      ]
     },
     {
       "title": "ITN Rechner",
       "short_description": "calculate your ITN",
-      "img": "assets/itn-rechner.png"
+      "img": "assets/itn-rechner.png",
+      "links": [
+        {
+          "name": "Code",
+          "url": "https://github.com/Michiii11/Tennis"
+        },
+        {
+          "name": "Try it out",
+          "url": "https://itnrechner.netlify.app"
+        }
+      ]
     },
     {
       "title": "Reservierungssystem",
-      "img": "assets/reservationssystem.png"
+      "img": "assets/reservationssystem.png",
+      "links": [
+        {
+            "name": "Visit it",
+            "url": "https://reservation-frontend-159013301993.europe-west1.run.app/calendar"
+        }
+      ]
     },
     {
       "title": "Easy Learning",
       "short_description": "learning app",
-      "img": "assets/easy-learning.png"
+      "img": "assets/easy-learning.png",
+      "links": [
+        {
+          "name": "Code",
+          "url": "https://github.com/Michiii11/EasyLearning"
+        },
+        {
+          "name": "Try it out",
+          "url": "https://simplelearn.netlify.app"
+        }
+      ]
     },
     {
       "title": "Chess",
       "short_description": "play chess",
-      "img": "assets/chess.png"
+      "img": "assets/chess.png",
+      "links": [
+        {
+          "name": "Code",
+          "url": "https://github.com/Michiii11/Schach"
+        },
+        {
+          "name": "Play it",
+          "url": "https://myschach.netlify.app"
+        }
+      ]
     },
     {
       "title": "Tetris",
       "short_description": "classic tetris game",
-      "img": "assets/tetris.png"
+      "img": "assets/tetris.png",
+      "links": [
+        {
+          "name": "Code",
+          "url": "https://github.com/Michiii11/Tetris"
+        },
+        {
+          "name": "Play it",
+          "url": "https://tetrisme.netlify.app"
+        }
+      ]
     }
   ],
   "filming": [
     {
       "title": "NO TOMORROW",
       "short_description": "time paradox movie",
-      "img": "assets/notomorrow.jpg"
+      "img": "assets/notomorrow.jpg",
+      "link": {
+        "name": "Watch it",
+        "url": "https://www.youtube.com/watch?v=qDVY-5UF4PY&t=6s"
+      }
     },
     {
       "title": "REVENGE",
       "short_description": "action short film",
-      "img": "assets/revenge.jpg"
+      "img": "assets/revenge.jpg",
+      "link": {
+        "name": "Watch it",
+        "url": "https://www.youtube.com/watch?v=Z6PDqlk2Nf8"
+      }
     },
     {
       "title": "Der Geisterjäger",
       "short_description": "thriller short film",
-      "img": "assets/geisterjäger.jpg"
+      "img": "assets/geisterjäger.jpg",
+      "link": {
+        "name": "Watch it",
+        "url": "https://www.youtube.com/watch?v=hUkpiqK9Qis&t=50s"
+      }
     },
     {
       "title": "Lego Stop Motion",
-      "img": "assets/stopmotion.jpg"
+      "img": "assets/stopmotion.jpg",
+      "link": {
+        "name": "Watch it",
+        "url": "https://www.youtube.com/watch?v=D0YVtJUaNP4"
+      }
     }
   ]
 }

@@ -1,0 +1,9 @@
+{
+  "photography": [
+    "personal/photo1.JPG"
+  ],
+  "personal": [
+    "personal/photo1.JPG",
+    "personal/photo2.png"
+  ]
+}

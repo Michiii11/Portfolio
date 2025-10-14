@@ -17,9 +17,6 @@ nav {
   z-index: 1000;
   background-color: rgb(41, 41, 41);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-nav {
   display: flex;
   justify-content: end;
   gap: 2rem;
@@ -33,7 +30,7 @@ nav a {
   text-decoration: none;
   color: #D9D9D9;
 }
-nav a.active {
+nav a.active, nav a.selected {
   font-weight: 600;
   color: #94EA6B;
 }
@@ -62,9 +59,10 @@ h3 {
 
 header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   margin-inline: 10vw;
-  height: 80vh;
+  min-height: 80vh;
+  gap: 5vh;
 }
 header div {
   display: flex;
@@ -81,7 +79,7 @@ header div {
   align-items: center;
 }
 .image img {
-  width: 20vw;
+  width: 20rem;
   aspect-ratio: 1/1;
   border-radius: 1rem;
 }
@@ -95,7 +93,7 @@ header div {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 3vw;
+  width: 3rem;
   aspect-ratio: 1/1;
   border-radius: 0.8rem;
   transition: all 0.2s ease;
@@ -147,13 +145,14 @@ section .nav {
   display: flex;
   justify-content: center;
   gap: 3rem;
+  margin-inline: 0.5rem;
   font-size: 1.5rem;
 }
 section .nav div {
   display: flex;
   justify-content: space-between;
   cursor: pointer;
-  width: 20%;
+  width: 20rem;
   flex-direction: row;
   align-items: center;
   padding: 0.5rem 1rem;
@@ -162,7 +161,7 @@ section .nav div {
   color: #111111;
   transition: 0.2s ease all;
 }
-section .nav div.active {
+section .nav div.active, section .nav div.selected {
   background-color: #94EA6B;
 }
 section .nav div:hover {
@@ -184,6 +183,10 @@ section .nav div:hover {
   padding: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.project div {
+  display: flex;
+  gap: 0.5rem;
 }
 .project img {
   width: 100%;
@@ -212,20 +215,158 @@ section .nav div:hover {
 }
 
 .skill {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
   align-items: center;
   background-color: #2b2b2b;
   border-radius: 0.5rem;
   padding: 2rem 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /*cursor: pointer;*/
 }
 .skill p {
   font-size: 1.25rem;
 }
+.skill div.skill-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 90%;
+  height: 90%;
+}
+.skill div {
+  display: flex;
+  align-items: center;
+  min-height: 80%;
+  width: 60%;
+}
 .skill img {
-  width: 50%;
+  width: 100%;
+}
+
+@keyframes popBack {
+  0% {
+    transform: scale(0.8) rotateY(180deg);
+  }
+  60% {
+    transform: scale(1.08) rotateY(180deg);
+  }
+  100% {
+    transform: scale(1) rotateY(180deg);
+  }
+}
+.bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  gap: 5vw;
+}
+
+.right {
+  background: #2b2b2b;
+  border-radius: 1.2rem;
+  padding: 1rem 1.5em;
+  margin: 0 auto;
+  color: #D9D9D9;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.right h2 {
+  font-size: 2.2em;
+  font-weight: 700;
+  color: #94EA6B;
+  margin-bottom: 24px;
+  text-align: center;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 12px rgba(148, 234, 107, 0.2666666667);
+}
+
+.right p {
+  margin-bottom: 1.2em;
+}
+
+.right strong {
+  color: #94EA6B;
+  font-weight: 700;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2vw;
+  margin-inline: 10vw;
+}
+.gallery img {
+  width: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+.gallery img:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 1200px) {
+  .bottom {
+    flex-direction: column;
+    align-items: start;
+    gap: 5vh;
+  }
+  .projects {
+    grid-template-columns: 1fr;
+    margin-inline: 15vw;
+  }
+  .skills {
+    width: 90%;
+    margin-inline: auto;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .gallery {
+    width: 90%;
+    margin-inline: auto;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 800px) {
+  .skills {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .projects {
+    width: 90%;
+    margin-inline: auto;
+  }
+  .gallery {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media (max-width: 450px) {
+  .image {
+    flex-direction: column;
+  }
+  .image div {
+    flex-direction: row;
+  }
+  .skills {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  section .nav {
+    gap: 1rem;
+  }
+  section .nav div {
+    justify-content: center;
+  }
+  section .nav i {
+    display: none;
+  }
 }
 
 /*# sourceMappingURL=index.css.map */
