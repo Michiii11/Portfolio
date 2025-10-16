@@ -1,7 +1,4 @@
 // === Constants & Initialization ===
-const DEFAULT_CATEGORY = "programming";
-let activeCategory = localStorage.getItem("activeCategory") || DEFAULT_CATEGORY;
-
 // === Utility Functions ===
 const $ = (selector, scope = document) => scope.querySelector(selector);
 const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
@@ -16,71 +13,116 @@ function setupNavigation() {
             link.classList.add("active");
         });
     });
-
-    window.addEventListener("DOMContentLoaded", () => {
-        $$(".nav > div").forEach(div => {
-            div.classList.toggle("active",
-                (activeCategory === "programming" && div.textContent.includes("Programming")) ||
-                (activeCategory === "filming" && div.textContent.includes("Filming"))
-            );
-        });
-        loadProjects();
-    });
-}
-
-function selectCategory(element, category) {
-    removeClassFromAll($$(".nav > div"), "active");
-    element.classList.add("active");
-    activeCategory = category;
-    localStorage.setItem("activeCategory", category);
-    loadProjects();
 }
 
 // === Project Loading ===
+function renderProjects(projects) {
+    return projects.map(project => `
+        <div class="project">
+            <img src="${addFallbackImage(project.img)}" alt="${project.title}">
+            <p>${project.title}${project.short_description ? ` - ${project.short_description}` : ""}</p>
+            <div>
+                ${
+                    Array.isArray(project.links)
+                        ? project.links.map(link => `<a href="${link.url}" target="_blank">${link.name}</a>`).join("")
+                        : `<a href="${project.link?.url || "#"}" target="_blank">${project.link?.name || "See more ->"}</a>`
+                }
+            </div>
+        </div>
+    `).join("");
+}
+
+function renderLimitedProjects(projects, container, button) {
+    const maxVisible = 4;
+    let isExpanded = false;
+
+    const updateProjects = () => {
+        if(projects.length <= maxVisible) {
+            button.style.display = "none";
+        } else {
+            button.style.display = "block";
+        }
+
+        const visibleProjects = isExpanded ? projects : projects.slice(0, maxVisible);
+        container.innerHTML = renderProjects(visibleProjects);
+
+        button.textContent = isExpanded ? "Weniger anzeigen" : "Mehr anzeigen";
+    };
+
+    button.addEventListener("click", () => {
+        isExpanded = !isExpanded;
+        updateProjects();
+    });
+
+    updateProjects();
+}
+
 async function loadProjects() {
     try {
         const response = await fetch("projects.json");
         const data = await response.json();
-        const projects = data[activeCategory] || [];
-        const html = projects.map(project => `
-            <div class="project">
-                <img src="${addFallbackImage(project.img)}" alt="${project.title}">
-                <p>${project.title}${project.short_description ? ` - ${project.short_description}` : ""}</p>
-                <div>
-                    ${
-            Array.isArray(project.links)
-                ? project.links.map(link => `<a href="${link.url}" target="_blank">${link.name} →</a>`).join("")
-                : `<a href="${project.link?.url || "#"}" target="_blank">${project.link?.name || "See more"} →</a>`
-        }
-                </div>
-            </div>
-        `).join("");
-        $(".projects").innerHTML = html;
+
+        // Projekte für jede Kategorie laden
+        const programmingContainer = document.querySelector(".programming .content");
+        const programmingButton = document.getElementById("show-all-programming");
+        renderLimitedProjects(data.programming, programmingContainer, programmingButton);
+
+        const filmingContainer = document.querySelector(".filming .content");
+        const filmingButton = document.getElementById("show-all-filming");
+        renderLimitedProjects(data.filming, filmingContainer, filmingButton);
     } catch (error) {
         console.error("Fehler beim Laden der Projekte:", error);
     }
 }
 
+loadProjects();
 // === Skill Handling ===
 async function loadSkills() {
     try {
         const response = await fetch("skills.json");
-        const skills = await response.json();
-        const html = skills.map(skill => `
-            <div class="skill" data-started="${skill.started}">
-                <div class="skill-inner">
-                    <div>
-                        <img src="${addFallbackImage(skill.icon)}" title="${skill.name}">
-                    </div>
-                    <p>${skill.name}</p>
-                    <span class="skill-duration" style="display:none;"></span>
+        const categories = await response.json();
+
+        const html = categories.map(category => `
+            <div class="skill-category">
+                <div class="header1">
+                    <p>${category.categorie}</p>
+                </div>
+                <div class="skills">
+                    ${category.skills.sort((a, b) => b.skills - a.skills).map(skill => `
+                        <div class="skill" data-started="${skill.started}">
+                            <div class="skill-inner">
+                                <div>
+                                    <img src="${addFallbackImage(skill.icon)}" title="${skill.name}">
+                                </div>
+                                <p>${skill.name}</p>
+                                <div class="stars">
+                                    ${renderStars(skill.skills, skill.started)}
+                                </div>
+                            </div>
+                        </div>
+                    `).join("")}
                 </div>
             </div>
         `).join("");
-        $(".skills").innerHTML = html;
+
+        $(".skills-container").innerHTML = html;
     } catch (error) {
         console.error("Fehler beim Laden der Skills:", error);
     }
+}
+
+function renderStars(rating, started) {
+    const fullStars = Math.floor(rating);
+    const halfStar = rating % 1 !== 0;
+    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+    return `
+        <div class="stars" data-tooltip="Seit ${formatDuration(started)}">
+            ${'<span class="star full">★</span>'.repeat(fullStars)}
+            ${halfStar ? '<span class="star half">★</span>' : ''}
+            ${'<span class="star empty">☆</span>'.repeat(emptyStars)}
+        </div>
+    `;
 }
 
 function formatDuration(startDate) {
@@ -167,7 +209,7 @@ function setupScrollObserver() {
                 });
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.3 }); // Threshold angepasst
 
     sections.forEach(section => observer.observe(section));
 
@@ -176,11 +218,18 @@ function setupScrollObserver() {
             removeClassFromAll(navLinks, "active");
             navLinks[0]?.classList.add("active");
         }
+
+        const scrollBar = document.getElementById('scroll-progress');
+        const scrollTop = window.scrollY;
+        const docHeight = document.body.scrollHeight - window.innerHeight;
+        const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        scrollBar.style.width = scrollPercent + '%';
     });
 }
 
 // === Initialization ===
 document.addEventListener("DOMContentLoaded", () => {
+    loadProjects()
     setupNavigation();
     setupGallery();
     setupScrollObserver();

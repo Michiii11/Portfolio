@@ -5,8 +5,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Michael Leisch</title>
     <link rel="stylesheet" href="index.css">
+    <!--todo logo-->
     <script src="script.js" defer></script>
     <script src="https://kit.fontawesome.com/557f0c19d3.js" crossorigin="anonymous"></script>
 </head>
@@ -16,6 +17,8 @@
         <a href="#projects" class="nav-link">Projects</a>
         <a href="#skills" class="nav-link">Skills</a>
         <a href="#gallery" class="nav-link">Gallery</a>
+
+        <div id="scroll-progress"></div>
     </nav>
 
     <header id="about">
@@ -28,39 +31,41 @@
                 <img src="assets/profil.png" alt="">
 
                 <div>
-                    <i class="fa-brands fa-youtube"></i>
-                    <a href="https://www.instagram.com/michi_leisch">
-                        <i class="fa-brands fa-instagram"></i>
+                    <a href="mailto:michael.leisch@gmx.at">
+                        <i class="fa-solid fa-envelope"></i>
                     </a>
 
                     <a href="https://github.com/Michiii11">
                         <i class="fa-brands fa-github"></i>
                     </a>
 
-                    <a href="mailto:michael.leisch@gmx.at">
-                        <i class="fa-solid fa-envelope"></i>
+                    <a href="https://www.instagram.com/michi_leisch">
+                        <i class="fa-brands fa-instagram"></i>
                     </a>
+
+                    <i class="fa-brands fa-youtube"></i>
                 </div>
             </div>
 
             <div class="right">
                 <p>
                     Hi! My name is <strong>Michael Leisch</strong>, and I’m <strong><span id="alter"></span> years old</strong>.
-                    I graduated from <strong>HTL Leonding</strong>, specializing in <strong>Media Technology and IT</strong>.
+                    I graduated from <strong>HTL Leonding</strong>, where I specialized in <strong>Media Technology and IT</strong>.
                 </p>
 
                 <p>
-                    I’m currently a <strong>videographer in the Austrian Armed Forces</strong>, where I capture and edit stories through film.
-                    While I enjoy filmmaking, my main focus lies in <strong>software development and creative problem-solving</strong>.
+                    I’m currently working as a <strong>videographer in the Austrian Armed Forces</strong>, creating visual stories that capture real experiences and emotions.
+                    Although I love the creative side of filmmaking, my real passion lies in <strong>software development and problem-solving</strong> — finding smart, elegant ways to bring ideas to life through code.
                 </p>
 
                 <p>
-                    I love building projects that combine technology and design — turning ideas into functional, purposeful solutions.
-                    I’ve already developed several apps and media projects that reflect my passion for innovation.
+                    I enjoy building projects that blend technology with design, creating tools and applications that are both functional and visually engaging.
+                    Over the past few years, I’ve developed several apps and media projects that reflect my curiosity and drive to innovate.
                 </p>
 
                 <p>
-                    Outside of tech, I enjoy playing <strong>tennis</strong> and look forward to starting my <strong>college tennis journey in fall 2026</strong>.
+                    Outside of tech, I’m an avid <strong>tennis player</strong> and can’t wait to begin my <strong>college tennis journey in fall 2026</strong>.
+                    The sport constantly reminds me of the importance of discipline, strategy, and perseverance — qualities I carry into my work as well.
                 </p>
             </div>
         </div>
@@ -70,28 +75,31 @@
     <section id="projects">
         <h2>PROJECTS</h2>
 
-        <div class="nav">
-            <div onclick="selectCategory(this, 'programming')">
+        <div class="programming">
+            <div class="header1">
                 <i class="fa-solid fa-code"></i>
                 <p>Programming</p>
-                <p></p>
             </div>
-            <div class="active" onclick="selectCategory(this, 'filming')">
-                <i class="fa-solid fa-video"></i>
-                <p>Filming</p>
-                <p></p>
-            </div>
+
+            <div class="content"></div>
+            <button id="show-all-programming" style="display: none;">Show All</button>
         </div>
 
-        <div class="projects">
+        <div class="filming">
+            <div class="header1">
+                <i class="fa-solid fa-video"></i>
+                <p>Filmmaking</p>
+            </div>
 
+            <div class="content"></div>
+            <button id="show-all-filming" style="display: none;">Show All</button>
         </div>
     </section>
 
     <section id="skills">
         <h2>SKILLS</h2>
 
-        <div class="skills"></div>
+        <div class="skills-container"></div>
     </section>
 
     <section id="gallery">

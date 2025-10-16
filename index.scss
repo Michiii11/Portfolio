@@ -1,8 +1,9 @@
 $gray100: rgb(41, 41, 41);
-$gray200: #2b2b2b;
+$gray200: #333333;
+$gray300: #404040;
 $gray700: #D9D9D9;
 $contrast: #111111;
-$accent: #94EA6B;
+$accent: #46a758;
 
 body{
   background-color: $gray100;
@@ -14,7 +15,25 @@ section, header {
   scroll-margin-top: 70px;
 }
 
+#scroll-progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  width: 0;
+  background: linear-gradient(
+                  90deg,
+                  lighten($accent, 20%),
+                  $accent,
+                  darken($accent, 15%)
+  );
+  border-radius: 2px;
+  transition: width 0.2s;
+  z-index: 2000;
+}
+
 nav{
+  overflow: visible;
   position: fixed;
   top: 0;
   left: 0;
@@ -55,7 +74,7 @@ nav{
 h1{
   letter-spacing: 1rem;
   font-size: 3rem;
-  font-weight: 500;
+  font-weight: 1000;
   color: $accent;
 }
 
@@ -111,30 +130,91 @@ header {
     border-radius: .8rem;
     transition: all .2s ease;
 
-    &.fa-youtube{
-      background-color: #FF7575;
-    }
-    &.fa-instagram{
-      background-color: #FC75FF;
-    }
-    &.fa-github{
-      background-color: #B275FF;
-    }
-    &.fa-envelope{
-      background-color: #7583FF;
+    $youtube-color: #FF7575;
+    $youtube-gradient: linear-gradient(45deg, #ff7575, #ff9a75, #ff7575);
+    $youtube-shadow: rgba(255, 117, 117, 0.7);
+
+    $instagram-color: #FC75FF;
+    $instagram-gradient: linear-gradient(45deg, #fc75ff, #ff75d4, #fc75ff);
+    $instagram-shadow: rgba(252, 117, 255, 0.7);
+
+    $github-color: #B275FF;
+    $github-gradient: linear-gradient(45deg, #b275ff, #8f75ff, #b275ff);
+    $github-shadow: rgba(178, 117, 255, 0.7);
+
+    $envelope-color: #7583FF;
+    $envelope-gradient: linear-gradient(45deg, #7583ff, #75a0ff, #7583ff);
+    $envelope-shadow: rgba(117, 131, 255, 0.7);
+
+    @mixin social-hover($gradient, $shadow) {
+      background: $gradient;
+      box-shadow: 0 0 18px 4px $shadow;
+      transform: scale(1.08);
     }
 
-    &.fa-youtube:hover {
-      background-color: darken(#FF7575, 10%);
+    &.fa-youtube,
+    &.fa-instagram,
+    &.fa-github,
+    &.fa-envelope {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.5s;
+      z-index: 1;
+
+      &:hover {
+        transform: scale(1.08);
+        &::before {
+          opacity: 1;
+        }
+      }
     }
-    &.fa-instagram:hover {
-      background-color: darken(#FC75FF, 10%);
+
+    &.fa-youtube {
+      background-color: $youtube-color;
+      &::before { background: $youtube-gradient; }
+      &:hover { @include social-hover($youtube-gradient, $youtube-shadow); }
     }
-    &.fa-github:hover {
-      background-color: darken(#B275FF, 10%);
+
+    &.fa-instagram {
+      background-color: $instagram-color;
+      &::before { background: $instagram-gradient; }
+      &:hover { @include social-hover($instagram-gradient, $instagram-shadow); }
     }
-    &.fa-envelope:hover {
-      background-color: darken(#7583FF, 10%);
+
+    &.fa-github {
+      background-color: $github-color;
+      &::before { background: $github-gradient; }
+      &:hover { @include social-hover($github-gradient, $github-shadow); }
+    }
+
+    &.fa-envelope {
+      background-color: $envelope-color;
+      &::before { background: $envelope-gradient; }
+      &:hover { @include social-hover($envelope-gradient, $envelope-shadow); }
+    }
+
+    @keyframes youtubeGlow {
+      0% { box-shadow: 0 0 15px 5px rgba(255, 117, 117, 0.6); }
+      50% { box-shadow: 0 0 25px 10px rgba(255, 117, 117, 0.8); }
+      100% { box-shadow: 0 0 15px 5px rgba(255, 117, 117, 0.6); }
+    }
+
+    @keyframes instaGlow {
+      0% { box-shadow: 0 0 15px 5px rgba(252, 117, 255, 0.6); }
+      50% { box-shadow: 0 0 25px 10px rgba(252, 117, 255, 0.8); }
+      100% { box-shadow: 0 0 15px 5px rgba(252, 117, 255, 0.6); }
+    }
+
+    @keyframes gitGlow {
+      0% { box-shadow: 0 0 15px 5px rgba(178, 117, 255, 0.6); }
+      50% { box-shadow: 0 0 25px 10px rgba(178, 117, 255, 0.8); }
+      100% { box-shadow: 0 0 15px 5px rgba(178, 117, 255, 0.6); }
+    }
+
+    @keyframes mailGlow {
+      0% { box-shadow: 0 0 15px 5px rgba(117, 131, 255, 0.6); }
+      50% { box-shadow: 0 0 25px 10px rgba(117, 131, 255, 0.8); }
+      100% { box-shadow: 0 0 15px 5px rgba(117, 131, 255, 0.6); }
     }
   }
 
@@ -150,13 +230,13 @@ section{
 
   h2{
     width: 100%;
-    background-color: $gray700;
-    color: $contrast;
+    color: $gray700;
+    background-color: $gray200;
     letter-spacing: .25rem;
     font-size: 3rem;
     text-align: center;
     padding-block: .5rem;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .nav{
@@ -169,7 +249,8 @@ section{
 
     div{
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
+      gap: 1rem;
       cursor: pointer;
       width: 20rem;
       flex-direction: row;
@@ -180,6 +261,11 @@ section{
       border-radius: .5rem;
       color: $contrast;
       transition: .2s ease all;
+      font-size: 1.25rem;
+
+      i{
+        font-size: 1rem;
+      }
 
       &.active, &.selected{
         background-color: $accent;
@@ -192,10 +278,48 @@ section{
   }
 }
 
-.projects{
+.header1{
+  width: 60%;
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3vh;
+  font-size: 1.5rem;
+  border-bottom: 1px solid $gray300;
+  padding-bottom: .5rem;
+}
+
+#projects > div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+#projects button{
+  padding: .5rem 1rem;
+  margin-bottom: 5vh;
+  cursor: pointer;
+  border-radius: .5rem;
+
+  text-decoration: none;
+  color: $accent;
+  transition: .2s ease all;
+  background-color: $gray200;
+  border: 1px solid $gray300;
+
+  &:hover{
+    background-color: lighten($accent, 10%);
+    color: $contrast;
+  }
+}
+
+.content{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 3vw;
+  gap: 2vw;
   margin-inline: 20vw;
 }
 
@@ -213,11 +337,14 @@ section{
     gap: .5rem;
   }
 
-  img{
+  img {
     width: 100%;
     height: 80%;
+    aspect-ratio: 16/9;
     border-radius: .5rem;
     border: 1px solid $gray100;
+    object-fit: cover;
+    object-position: top;
   }
 
   p{
@@ -228,6 +355,9 @@ section{
     text-decoration: none;
     color: $accent;
     transition: .2s ease all;
+    background-color: $gray300;
+    padding: .25rem .5rem;
+    border-radius: .25rem;
 
     &:hover{
       text-decoration: underline;
@@ -235,11 +365,63 @@ section{
   }
 }
 
+.stars::after {
+  content: attr(data-tooltip);
+  margin-top: .25rem;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: $gray100;
+  color: $gray700;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.3rem;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.stars:hover::after {
+  opacity: 1;
+}
+
+.skill .stars {
+  display: flex;
+  justify-content: center;
+  gap: 0.2rem;
+  z-index: 2;
+  min-height: 1rem;
+  background-color: $gray300;
+  padding: .25rem .5rem;
+  width: fit-content;
+  border-radius: .5rem;
+  cursor: pointer;
+
+  position: relative;
+
+  .star {
+    font-size: 1.15rem;
+    color: $accent;
+  }
+
+  .star.empty {
+    color: lightgray;
+  }
+
+  .star.half {
+    background: linear-gradient(90deg, $accent 50%, lightgray 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
 .skills{
   display: grid;
-  gap: 1rem;
+  gap: .5rem;
   margin-inline: 10vw;
-  margin-block: 5vh;
+  margin-block: 2.5vh 5vh;
   grid-template-columns: repeat(6, 1fr);
 }
 
@@ -250,9 +432,8 @@ section{
   align-items: center;
   background-color: $gray200;
   border-radius: .5rem;
-  padding: 2rem .5rem;
+  padding: 1rem .5rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  /*cursor: pointer;*/
 
   p{
     font-size: 1.25rem;
@@ -266,18 +447,19 @@ section{
     justify-content: space-between;
     gap: 1rem;
     width: 90%;
-    height: 90%;
+    height: 100%;
   }
 
   div{
     display: flex;
     align-items: center;
-    min-height: 80%;
     width: 60%;
   }
 
   img{
     width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: contain;
   }
 }
 
@@ -299,21 +481,11 @@ section{
   border-radius: 1.2rem;
   padding: 1rem 1.5em;
   margin: 0 auto;
-  color: #D9D9D9;
+  color: $gray700;
   font-size: 1.08rem;
   line-height: 1.7;
   letter-spacing: 0.01em;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.right h2 {
-  font-size: 2.2em;
-  font-weight: 700;
-  color: #94EA6B;
-  margin-bottom: 24px;
-  text-align: center;
-  letter-spacing: 0.04em;
-  text-shadow: 0 2px 12px #94EA6B44;
 }
 
 .right p {
@@ -321,7 +493,7 @@ section{
 }
 
 .right strong {
-  color: #94EA6B;
+  color: $accent;
   font-weight: 700;
 }
 
@@ -334,6 +506,9 @@ section{
 
   img{
     width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    object-position: top;
     border-radius: .5rem;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     transition: transform .2s ease;
@@ -349,28 +524,84 @@ section{
 
 
 @media (max-width: 1200px) {
-  .bottom{
+  .image{
     flex-direction: column;
+    gap: 1rem;
+
+    img{
+      width: 25vw;
+    }
+
+    div{
+      flex-direction: row;
+
+      i{
+        font-size: 2vw;
+        width: 4vw;
+        border-radius: 1vw;
+      }
+    }
+  }
+
+  h1{
+    letter-spacing: .5rem;
+  }
+
+  .bottom{
+    flex-direction: row;
     align-items: start;
     gap: 5vh;
   }
 
-  .projects{
-    grid-template-columns: 1fr;
-    margin-inline: 15vw;
+  .header1{
+    width: 95%;
+  }
+
+  .content{
+    width: 95%;
+    grid-template-columns: 1fr 1fr;
+    margin-inline: auto;
+    gap: 1rem;
   }
 
   .skills{
-    width: 90%;
+    width: 95%;
     margin-inline: auto;
     grid-template-columns: repeat(4, 1fr);
   }
 
   .gallery{
-    width: 90%;
+    width: 95%;
     margin-inline: auto;
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+@media (max-width: 900px){
+  .bottom{
+    flex-direction: column;
+
+  }
+
+  .image{
+    flex-direction: row;
+
+    img{
+      width: 50vw;
+    }
+
+    div{
+      flex-direction: column;
+      gap: 1rem;
+
+      i{
+        font-size: 4vw;
+        width: 8vw;
+        border-radius: 2vw;
+      }
+    }
+  }
+
 }
 
 @media (max-width: 800px){
@@ -379,10 +610,11 @@ section{
   }
 }
 
-@media (max-width: 600px){
-  .projects{
+@media (max-width: 650px){
+  .content{
     width: 90%;
     margin-inline: auto;
+    grid-template-columns: 1fr;
   }
   .gallery{
     grid-template-columns: repeat(1, 1fr);
@@ -390,14 +622,6 @@ section{
 }
 
 @media (max-width: 450px){
-  .image{
-    flex-direction: column;
-
-    div{
-      flex-direction: row;
-    }
-  }
-
   .skills{
     grid-template-columns: repeat(2, 1fr);
   }

@@ -1,114 +1,143 @@
 [
   {
-    "name": "HTML",
-    "started": "09-2020",
-    "icon": "logos/html.png"
+    "categorie": "Web Development",
+    "skills": [
+      {
+        "name": "HTML",
+        "started": "09-2020",
+        "skills": 5,
+        "icon": "logos/html.png"
+      },
+      {
+        "name": "CSS",
+        "started": "09-2020",
+        "skills": 5,
+        "icon": "logos/css.png"
+      },
+      {
+        "name": "SCSS",
+        "started": "09-2022",
+        "skills": 5,
+        "icon": "logos/scss.png"
+      },
+      {
+        "name": "JavaScript",
+        "started": "09-2021",
+        "skills": 5,
+        "icon": "logos/javascript.png"
+      },
+      {
+        "name": "TypeScript",
+        "started": "09-2022",
+        "skills": 5,
+        "icon": "logos/typescript.png"
+      },
+      {
+        "name": "Node JS",
+        "started": "09-2021",
+        "skills": 3.5,
+        "icon": "logos/nodejs.png"
+      },
+      {
+        "name": "PHP",
+        "started": "09-2022",
+        "skills": 3,
+        "icon": "logos/php.png"
+      },
+      {
+        "name": "SQL",
+        "started": "09-2022",
+        "skills": 5,
+        "icon": "logos/sql.png"
+      },
+      {
+        "name": "Angular",
+        "started": "09-2023",
+        "skills": 5,
+        "icon": "logos/angular.png"
+      }
+    ]
   },
   {
-    "name": "CSS",
-    "started": "09-2020",
-    "icon": "logos/css.png"
+    "categorie": "Backend & DevOps",
+    "skills": [
+      {
+        "name": "Java",
+        "started": "09-2020",
+        "skills": 4.5,
+        "icon": "logos/java.png"
+      },
+      {
+        "name": "Quarkus",
+        "started": "09-2023",
+        "skills": 5,
+        "icon": "logos/quarkus.png"
+      },
+      {
+        "name": "Docker",
+        "started": "09-2023",
+        "skills": 3,
+        "icon": "logos/docker.png"
+      },
+      {
+        "name": "Github",
+        "started": "09-2022",
+        "skills": 5,
+        "icon": "logos/github.png"
+      }
+    ]
   },
   {
-    "name": "SCSS",
-    "started": "09-2022",
-    "icon": "logos/scss.png"
-  },
-  {
-    "name": "JavaScript",
-    "started": "09-2021",
-    "icon": "logos/javascript.png"
-  },
-  {
-    "name": "TypeScript",
-    "started": "09-2022",
-    "icon": "logos/typescript.png"
-  },
-  {
-    "name": "Node JS",
-    "started": "09-2021",
-    "icon": "logos/nodejs.png"
-  },
-  {
-    "name": "PHP",
-    "started": "09-2022",
-    "icon": "logos/php.png"
-  },
-  {
-    "name": "Angular",
-    "started": "09-2023",
-    "icon": "logos/angular.png"
-  },
-
-  {
-    "name": "Java",
-    "started": "09-2020",
-    "icon": "logos/java.png"
-  },
-  {
-    "name": "Quarkus",
-    "started": "09-2023",
-    "icon": "logos/quarkus.png"
-  },
-  {
-    "name": "SQL",
-    "started": "09-2022",
-    "icon": "logos/sql.png"
-  },
-
-  {
-    "name": "Github",
-    "started": "09-2022",
-    "icon": "logos/github.png"
-  },
-  {
-    "name": "Premiere Pro",
-    "started": "09-2020",
-    "icon": "logos/premierepro.png"
-  },
-  {
-    "name": "Photoshop",
-    "started": "09-2020",
-    "icon": "logos/photoshop.png"
-  },
-  {
-    "name": "Lightroom",
-    "started": "09-2024",
-    "icon": "logos/lightroom.png"
-  },
-  {
-    "name": "After Effects",
-    "started": "09-2021",
-    "icon": "logos/aftereffects.png"
-  },
-  {
-    "name": "Audition",
-    "started": "09-2022",
-    "icon": "logos/audition.png"
-  },
-  {
-    "name": "Illustrator",
-    "started": "09-2023",
-    "icon": "logos/illustrator.png"
-  },
-
-  {
-    "name": "Davinci Resolve",
-    "started": "09-2024",
-    "icon": "logos/davinciresolve.png"
-  },
-
-  {
-    "name": "Docker",
-    "started": "09-2023",
-    "icon": "logos/docker.png"
-  },
-
-
-
-  {
-    "name": "Cinema 4D",
-    "started": "09-2023",
-    "icon": "logos/cinema4d.png"
+    "categorie": "Design & Creative Tools",
+    "skills": [
+      {
+        "name": "Photoshop",
+        "started": "09-2020",
+        "skills": 4,
+        "icon": "logos/photoshop.png"
+      },
+      {
+        "name": "Illustrator",
+        "started": "09-2023",
+        "skills": 3,
+        "icon": "logos/illustrator.png"
+      },
+      {
+        "name": "Lightroom",
+        "started": "09-2024",
+        "skills": 3.5,
+        "icon": "logos/lightroom.png"
+      },
+      {
+        "name": "After Effects",
+        "started": "09-2021",
+        "skills": 3.5,
+        "icon": "logos/aftereffects.png"
+      },
+      {
+        "name": "Premiere Pro",
+        "started": "09-2020",
+        "skills": 5,
+        "icon": "logos/premierepro.png"
+      },
+      {
+        "name": "Audition",
+        "started": "09-2022",
+        "skills": 4,
+        "icon": "logos/audition.png"
+      },
+      {
+        "name": "Davinci Resolve",
+        "started": "09-2024",
+        "skills": 3.5,
+        "icon": "logos/davinciresolve.png"
+      },
+      {
+        "name": "Cinema 4D",
+        "started": "09-2023",
+        "skills": 3,
+        "icon": "logos/cinema4d.png"
+      }
+    ]
   }
 ]
