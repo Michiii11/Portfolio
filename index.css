@@ -126,9 +126,6 @@ header div {
 .image i.fa-youtube {
   background-color: #FF7575;
 }
-.image i.fa-youtube::before {
-  background: linear-gradient(45deg, #ff7575, #ff9a75, #ff7575);
-}
 .image i.fa-youtube:hover {
   background: linear-gradient(45deg, #ff7575, #ff9a75, #ff7575);
   box-shadow: 0 0 18px 4px rgba(255, 117, 117, 0.7);
@@ -136,9 +133,6 @@ header div {
 }
 .image i.fa-instagram {
   background-color: #FC75FF;
-}
-.image i.fa-instagram::before {
-  background: linear-gradient(45deg, #fc75ff, #ff75d4, #fc75ff);
 }
 .image i.fa-instagram:hover {
   background: linear-gradient(45deg, #fc75ff, #ff75d4, #fc75ff);
@@ -148,9 +142,6 @@ header div {
 .image i.fa-github {
   background-color: #B275FF;
 }
-.image i.fa-github::before {
-  background: linear-gradient(45deg, #b275ff, #8f75ff, #b275ff);
-}
 .image i.fa-github:hover {
   background: linear-gradient(45deg, #b275ff, #8f75ff, #b275ff);
   box-shadow: 0 0 18px 4px rgba(178, 117, 255, 0.7);
@@ -158,9 +149,6 @@ header div {
 }
 .image i.fa-envelope {
   background-color: #7583FF;
-}
-.image i.fa-envelope::before {
-  background: linear-gradient(45deg, #7583ff, #75a0ff, #7583ff);
 }
 .image i.fa-envelope:hover {
   background: linear-gradient(45deg, #7583ff, #75a0ff, #7583ff);
@@ -262,6 +250,10 @@ section .nav div:hover {
   background-color: #63bd73;
 }
 
+#projects .header1 {
+  margin-top: 5vh;
+}
+
 .header1 {
   width: 60%;
   margin-inline: auto;
@@ -300,9 +292,9 @@ section .nav div:hover {
 
 .content {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 2vw;
-  margin-inline: 20vw;
+  margin-inline: 10vw;
 }
 
 .project {
@@ -560,8 +552,11 @@ section .nav div:hover {
   }
 }
 @media (max-width: 650px) {
+  #projects .header1 {
+    margin-top: 2vh;
+  }
   .content {
-    width: 90%;
+    width: 95%;
     margin-inline: auto;
     grid-template-columns: 1fr;
   }

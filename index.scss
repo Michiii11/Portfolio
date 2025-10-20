@@ -171,25 +171,21 @@ header {
 
     &.fa-youtube {
       background-color: $youtube-color;
-      &::before { background: $youtube-gradient; }
       &:hover { @include social-hover($youtube-gradient, $youtube-shadow); }
     }
 
     &.fa-instagram {
       background-color: $instagram-color;
-      &::before { background: $instagram-gradient; }
       &:hover { @include social-hover($instagram-gradient, $instagram-shadow); }
     }
 
     &.fa-github {
       background-color: $github-color;
-      &::before { background: $github-gradient; }
       &:hover { @include social-hover($github-gradient, $github-shadow); }
     }
 
     &.fa-envelope {
       background-color: $envelope-color;
-      &::before { background: $envelope-gradient; }
       &:hover { @include social-hover($envelope-gradient, $envelope-shadow); }
     }
 
@@ -278,6 +274,10 @@ section{
   }
 }
 
+#projects .header1{
+  margin-top: 5vh;
+}
+
 .header1{
   width: 60%;
   margin-inline: auto;
@@ -318,9 +318,9 @@ section{
 
 .content{
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 2vw;
-  margin-inline: 20vw;
+  margin-inline: 10vw;
 }
 
 .project{
@@ -611,8 +611,11 @@ section{
 }
 
 @media (max-width: 650px){
+  #projects .header1 {
+    margin-top: 2vh;
+  }
   .content{
-    width: 90%;
+    width: 95%;
     margin-inline: auto;
     grid-template-columns: 1fr;
   }

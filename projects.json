@@ -6,11 +6,11 @@
       "img": "assets/flag-game.png",
       "links": [
         {
-          "name": "Code </>",
+          "name": "Code &lt;/&gt;",
           "url": "https://github.com/Michiii11/Flags"
         },
         {
-          "name": "Play it ->",
+          "name": "Play it &rarr;",
           "url": "https://learnflags.netlify.app"
         }
       ]
@@ -21,11 +21,11 @@
       "img": "assets/itn-rechner.png",
       "links": [
         {
-          "name": "Code </>",
+          "name": "Code &lt;/&gt;",
           "url": "https://github.com/Michiii11/Tennis"
         },
         {
-          "name": "Try it out ->",
+          "name": "Try it out &rarr;",
           "url": "https://itnrechner.netlify.app"
         }
       ]
@@ -35,7 +35,7 @@
       "img": "assets/reservationssystem.png",
       "links": [
         {
-            "name": "Visit it ->",
+            "name": "Visit it &rarr;",
             "url": "https://reservation-frontend-159013301993.europe-west1.run.app/calendar"
         }
       ]
@@ -46,11 +46,11 @@
       "img": "assets/easy-learning.png",
       "links": [
         {
-          "name": "Code </>",
+          "name": "Code &lt;/&gt;",
           "url": "https://github.com/Michiii11/EasyLearning"
         },
         {
-          "name": "Try it out ->",
+          "name": "Try it out &rarr;",
           "url": "https://simplelearn.netlify.app"
         }
       ]
@@ -61,11 +61,11 @@
       "img": "assets/chess.png",
       "links": [
         {
-          "name": "Code </>",
+          "name": "Code &lt;/&gt;",
           "url": "https://github.com/Michiii11/Schach"
         },
         {
-          "name": "Play it ->",
+          "name": "Play it &rarr;",
           "url": "https://myschach.netlify.app"
         }
       ]
@@ -76,11 +76,11 @@
       "img": "assets/tetris.png",
       "links": [
         {
-          "name": "Code </>",
+          "name": "Code &lt;/&gt;",
           "url": "https://github.com/Michiii11/Tetris"
         },
         {
-          "name": "Play it ->",
+          "name": "Play it &rarr;",
           "url": "https://tetrisme.netlify.app"
         }
       ]
@@ -92,7 +92,7 @@
       "short_description": "time paradox movie",
       "img": "assets/notomorrow.jpg",
       "link": {
-        "name": "Watch it ->",
+        "name": "Watch it &rarr;",
         "url": "https://www.youtube.com/watch?v=qDVY-5UF4PY&t=6s"
       }
     },
@@ -101,7 +101,7 @@
       "short_description": "action short film",
       "img": "assets/revenge.jpg",
       "link": {
-        "name": "Watch it ->",
+        "name": "Watch it &rarr;",
         "url": "https://www.youtube.com/watch?v=Z6PDqlk2Nf8"
       }
     },
@@ -110,7 +110,7 @@
       "short_description": "thriller short film",
       "img": "assets/geisterjäger.jpg",
       "link": {
-        "name": "Watch it ->",
+        "name": "Watch it &rarr;",
         "url": "https://www.youtube.com/watch?v=hUkpiqK9Qis&t=50s"
       }
     },
@@ -118,7 +118,7 @@
       "title": "Lego Stop Motion",
       "img": "assets/stopmotion.jpg",
       "link": {
-        "name": "Watch it ->",
+        "name": "Watch it &rarr;",
         "url": "https://www.youtube.com/watch?v=D0YVtJUaNP4"
       }
     }

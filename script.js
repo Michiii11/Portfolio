@@ -8,9 +8,13 @@ const addFallbackImage = img => img || "https://via.placeholder.com/150?text=No+
 // === Navigation Handling ===
 function setupNavigation() {
     $$(".nav-link").forEach(link => {
-        link.addEventListener("click", () => {
-            removeClassFromAll($$(".nav-link"), "active");
-            link.classList.add("active");
+        link.addEventListener("click", e => {
+            e.preventDefault();
+            const targetId = link.getAttribute("href");
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: "smooth" });
+            }
         });
     });
 }
@@ -32,8 +36,31 @@ function renderProjects(projects) {
     `).join("");
 }
 
+let maxVisible = 6;
+
+function getMaxVisible() {
+    const width = window.innerWidth;
+    if (width <= 650) return 2;
+    if (width <= 1200) return 4;
+    return 6;
+}
+
+function updateMaxVisible() {
+    const newValue = getMaxVisible();
+    if (newValue !== maxVisible) {
+        maxVisible = newValue;
+    }
+}
+
+updateMaxVisible();
+
+window.addEventListener("resize", updateMaxVisible);
+
+const ro = new ResizeObserver(updateMaxVisible);
+ro.observe(document.documentElement);
+
+
 function renderLimitedProjects(projects, container, button) {
-    const maxVisible = 4;
     let isExpanded = false;
 
     const updateProjects = () => {
@@ -75,7 +102,6 @@ async function loadProjects() {
     }
 }
 
-loadProjects();
 // === Skill Handling ===
 async function loadSkills() {
     try {
@@ -209,7 +235,7 @@ function setupScrollObserver() {
                 });
             }
         });
-    }, { threshold: 0.3 }); // Threshold angepasst
+    }, { threshold: 0.1 }); // Kleinerer Schwellenwert für Mobile
 
     sections.forEach(section => observer.observe(section));
 

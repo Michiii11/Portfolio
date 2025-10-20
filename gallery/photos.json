@@ -1,9 +1,24 @@
 {
   "photography": [
-    "personal/photo1.JPG"
+    "photography/photo15.JPG",
+    "photography/photo14.JPG",
+    "photography/photo12.JPG",
+
+    "photography/photo3.JPG",
+    "photography/photo10.JPG",
+    "photography/photo11.JPG",
+
+    "photography/photo13.JPG",
+    "photography/photo17.JPG",
+    "photography/photo4.JPG",
+
+    "photography/photo6.JPG",
+    "photography/photo18.JPG",
+    "photography/photo5.JPG"
   ],
   "personal": [
     "personal/photo1.JPG",
-    "personal/photo2.png"
+    "personal/photo2.png",
+    "personal/photo3.JPG"
   ]
 }
