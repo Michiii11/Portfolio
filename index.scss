@@ -1,6 +1,7 @@
 $gray100: rgb(41, 41, 41);
 $gray200: #333333;
 $gray300: #404040;
+$gray600: #A6A6A6;
 $gray700: #D9D9D9;
 $contrast: #111111;
 $accent: #46a758;
@@ -74,7 +75,7 @@ nav{
 h1{
   letter-spacing: 1rem;
   font-size: 3rem;
-  font-weight: 1000;
+  font-weight: 600;
   color: $accent;
 }
 
@@ -101,16 +102,52 @@ header {
   gap: 3rem;
 }
 
+.flip-container {
+  perspective: 1000px; /* sorgt für den 3D-Effekt */
+  width: 20rem;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 1rem;
+}
+
+.flip-card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.flip-container:hover .flip-card {
+  transform: rotateX(180deg);
+}
+
+.flip-front, .flip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px; /* optional für weiche Kanten */
+  overflow: hidden;
+}
+
+.flip-front img, .flip-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Rückseite */
+.flip-back {
+  transform: rotateX(180deg);
+}
+
+
 .image{
   flex-direction: row;
   gap: 2rem;
   align-items: center;
-
-  img{
-    width: 20rem;
-    aspect-ratio: 1/1;
-    border-radius: 1rem;
-  }
 
   a{
     color: $gray700;
@@ -331,9 +368,22 @@ section{
   padding: 1rem;
   border-radius: .5rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: all .2s ease;
+  cursor: pointer;
+
+  &:hover{
+    box-shadow: 0 4px 24px 0 var(--project-shadow, rgba(0,0,0,0.18));
+    transform: scale(1.02);
+  }
+
+  .description{
+    font-size: 0.9rem;
+    color: $gray600;
+  }
 
   div{
     display: flex;
+    align-items: center;
     gap: .5rem;
   }
 
@@ -377,10 +427,11 @@ section{
   padding: 0.3rem 0.5rem;
   border-radius: 0.3rem;
   font-size: 0.8rem;
-  white-space: nowrap;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease-in-out;
+  text-align: center;
+  white-space: pre-line;
 }
 
 .stars:hover::after {
@@ -463,6 +514,7 @@ section{
   }
 }
 
+
 @keyframes popBack {
   0% { transform: scale(0.8) rotateY(180deg);}
   60% { transform: scale(1.08) rotateY(180deg);}
@@ -528,7 +580,7 @@ section{
     flex-direction: column;
     gap: 1rem;
 
-    img{
+    .flip-container{
       width: 25vw;
     }
 
@@ -585,9 +637,10 @@ section{
 
   .image{
     flex-direction: row;
+    gap: 2rem;
 
-    img{
-      width: 50vw;
+    .flip-container{
+      width: 60vw;
     }
 
     div{

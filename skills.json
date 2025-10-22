@@ -35,13 +35,13 @@
       {
         "name": "Node JS",
         "started": "09-2021",
-        "skills": 3.5,
+        "skills": 2,
         "icon": "logos/nodejs.png"
       },
       {
         "name": "PHP",
         "started": "09-2022",
-        "skills": 3,
+        "skills": 2,
         "icon": "logos/php.png"
       },
       {
@@ -64,7 +64,7 @@
       {
         "name": "Java",
         "started": "09-2020",
-        "skills": 4.5,
+        "skills": 4,
         "icon": "logos/java.png"
       },
       {
@@ -99,19 +99,19 @@
       {
         "name": "Illustrator",
         "started": "09-2023",
-        "skills": 3,
+        "skills": 2,
         "icon": "logos/illustrator.png"
       },
       {
         "name": "Lightroom",
         "started": "09-2024",
-        "skills": 3.5,
+        "skills": 3,
         "icon": "logos/lightroom.png"
       },
       {
         "name": "After Effects",
         "started": "09-2021",
-        "skills": 3.5,
+        "skills": 2,
         "icon": "logos/aftereffects.png"
       },
       {
@@ -123,13 +123,13 @@
       {
         "name": "Audition",
         "started": "09-2022",
-        "skills": 4,
+        "skills": 3,
         "icon": "logos/audition.png"
       },
       {
         "name": "Davinci Resolve",
-        "started": "09-2024",
-        "skills": 3.5,
+        "started": "09-2025",
+        "skills": 2,
         "icon": "logos/davinciresolve.png"
       },
       {

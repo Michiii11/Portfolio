@@ -1,78 +1,83 @@
-// === Constants & Initialization ===
 // === Utility Functions ===
 const $ = (selector, scope = document) => scope.querySelector(selector);
 const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
 const removeClassFromAll = (elements, className) => elements.forEach(el => el.classList.remove(className));
 const addFallbackImage = img => img || "https://via.placeholder.com/150?text=No+Image";
+const hexToRgb = hex => {
+    hex = hex.replace("#", "");
+    if (hex.length === 3) hex = hex.split("").map(x => x + x).join("");
+    const num = parseInt(hex, 16);
+    return `${(num >> 16) & 255},${(num >> 8) & 255},${num & 255}`;
+};
 
 // === Navigation Handling ===
 function setupNavigation() {
     $$(".nav-link").forEach(link => {
         link.addEventListener("click", e => {
             e.preventDefault();
-            const targetId = link.getAttribute("href");
-            const targetSection = document.querySelector(targetId);
-            if (targetSection) {
-                targetSection.scrollIntoView({ behavior: "smooth" });
-            }
+            const targetSection = $(link.getAttribute("href"));
+            targetSection?.scrollIntoView({ behavior: "smooth" });
         });
     });
 }
 
-// === Project Loading ===
-function renderProjects(projects) {
-    return projects.map(project => `
-        <div class="project">
-            <img src="${addFallbackImage(project.img)}" alt="${project.title}">
-            <p>${project.title}${project.short_description ? ` - ${project.short_description}` : ""}</p>
-            <div>
-                ${
-                    Array.isArray(project.links)
-                        ? project.links.map(link => `<a href="${link.url}" target="_blank">${link.name}</a>`).join("")
-                        : `<a href="${project.link?.url || "#"}" target="_blank">${project.link?.name || "See more ->"}</a>`
-                }
-            </div>
-        </div>
-    `).join("");
-}
+// === Projects ===
+const maxVisibleDefault = 100;
+let maxVisible = maxVisibleDefault;
 
-let maxVisible = 6;
+const getMaxVisible = () => {
+    // TODO: Falls du wieder responsive willst, kannst du hier zurückstellen
+    return maxVisibleDefault;
+};
 
-function getMaxVisible() {
-    const width = window.innerWidth;
-    if (width <= 650) return 2;
-    if (width <= 1200) return 4;
-    return 6;
-}
-
-function updateMaxVisible() {
+const updateMaxVisible = () => {
     const newValue = getMaxVisible();
-    if (newValue !== maxVisible) {
-        maxVisible = newValue;
-    }
-}
-
-updateMaxVisible();
+    if (newValue !== maxVisible) maxVisible = newValue;
+};
 
 window.addEventListener("resize", updateMaxVisible);
+new ResizeObserver(updateMaxVisible).observe(document.documentElement);
 
-const ro = new ResizeObserver(updateMaxVisible);
-ro.observe(document.documentElement);
+function handleProjectClick(event, url) {
+    if (event.target.tagName.toLowerCase() === "a") return;
+    window.open(url, "_blank");
+}
 
+function renderProjects(projects) {
+    return projects.map(project => {
+        const { color, img, title, short_description, links, link } = project;
+        const rgbaColor = color ? `rgba(${hexToRgb(color)}, 0.5)` : `rgba(240,240,240,0.18)`;
+        const targetUrl = Array.isArray(links) && links.length
+            ? links[links.length - 1].url
+            : link?.url || "#";
+
+        const linkHTML = Array.isArray(links)
+            ? links.map(l => `<a href="${l.url}" target="_blank">${l.name}</a>`).join("")
+            : `<a href="${link?.url || "#"}" target="_blank">${link?.name || "See more →"}</a>`;
+
+        return `
+            <div class="project" 
+                 data-color="${color || ''}" 
+                 style="--project-shadow: ${rgbaColor};"
+                 onclick="handleProjectClick(event, '${targetUrl}')">
+                <img src="${addFallbackImage(img)}" loading="lazy" alt="${title}">
+                <div>
+                    <p>${title}</p>
+                    <p class="description">- ${short_description}</p>
+                </div>
+                <div>${linkHTML}</div>
+            </div>
+        `;
+    }).join("");
+}
 
 function renderLimitedProjects(projects, container, button) {
     let isExpanded = false;
 
     const updateProjects = () => {
-        if(projects.length <= maxVisible) {
-            button.style.display = "none";
-        } else {
-            button.style.display = "block";
-        }
-
-        const visibleProjects = isExpanded ? projects : projects.slice(0, maxVisible);
-        container.innerHTML = renderProjects(visibleProjects);
-
+        button.style.display = projects.length <= maxVisible ? "none" : "block";
+        const visible = isExpanded ? projects : projects.slice(0, maxVisible);
+        container.innerHTML = renderProjects(visible);
         button.textContent = isExpanded ? "Weniger anzeigen" : "Mehr anzeigen";
     };
 
@@ -86,67 +91,75 @@ function renderLimitedProjects(projects, container, button) {
 
 async function loadProjects() {
     try {
-        const response = await fetch("projects.json");
-        const data = await response.json();
+        const data = await (await fetch("projects.json")).json();
+        const sections = [
+            { key: "programming", selector: ".programming", buttonId: "show-all-programming" },
+            { key: "filming", selector: ".filming", buttonId: "show-all-filming" }
+        ];
 
-        // Projekte für jede Kategorie laden
-        const programmingContainer = document.querySelector(".programming .content");
-        const programmingButton = document.getElementById("show-all-programming");
-        renderLimitedProjects(data.programming, programmingContainer, programmingButton);
-
-        const filmingContainer = document.querySelector(".filming .content");
-        const filmingButton = document.getElementById("show-all-filming");
-        renderLimitedProjects(data.filming, filmingContainer, filmingButton);
-    } catch (error) {
-        console.error("Fehler beim Laden der Projekte:", error);
+        sections.forEach(({ key, selector, buttonId }) => {
+            const container = $(`${selector} .content`);
+            const button = $(`#${buttonId}`);
+            renderLimitedProjects(data[key], container, button);
+        });
+    } catch (err) {
+        console.error("Fehler beim Laden der Projekte:", err);
     }
 }
 
-// === Skill Handling ===
+// === Skills ===
 async function loadSkills() {
     try {
-        const response = await fetch("skills.json");
-        const categories = await response.json();
-
-        const html = categories.map(category => `
+        const categories = await (await fetch("skills.json")).json();
+        const html = categories.map(cat => `
             <div class="skill-category">
-                <div class="header1">
-                    <p>${category.categorie}</p>
-                </div>
+                <div class="header1"><p>${cat.categorie}</p></div>
                 <div class="skills">
-                    ${category.skills.sort((a, b) => b.skills - a.skills).map(skill => `
-                        <div class="skill" data-started="${skill.started}">
-                            <div class="skill-inner">
-                                <div>
-                                    <img src="${addFallbackImage(skill.icon)}" title="${skill.name}">
-                                </div>
-                                <p>${skill.name}</p>
-                                <div class="stars">
-                                    ${renderStars(skill.skills, skill.started)}
-                                </div>
-                            </div>
-                        </div>
-                    `).join("")}
+                    ${cat.skills
+            .sort((a, b) => b.skills - a.skills)
+            .map(skill => renderSkill(skill))
+            .join("")}
                 </div>
             </div>
         `).join("");
-
         $(".skills-container").innerHTML = html;
-    } catch (error) {
-        console.error("Fehler beim Laden der Skills:", error);
+    } catch (err) {
+        console.error("Fehler beim Laden der Skills:", err);
     }
 }
 
+function renderSkill(skill) {
+    const { icon, name, skills, started } = skill;
+    return `
+        <div class="skill" data-started="${started}">
+            <div class="skill-inner">
+                <div><img src="${addFallbackImage(icon)}" title="${name}" loading="lazy"></div>
+                <p>${name}</p>
+                <div class="stars">${renderStars(skills, started)}</div>
+            </div>
+        </div>
+    `;
+}
+
 function renderStars(rating, started) {
-    const fullStars = Math.floor(rating);
-    const halfStar = rating % 1 !== 0;
-    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+    const full = Math.floor(rating);
+    const half = rating % 1 !== 0;
+    const empty = 5 - full - (half ? 1 : 0);
+
+    const ranks = [
+        "★ Basic Knowledge",
+        "★★ Beginner",
+        "★★★ Intermediate",
+        "★★★★ Advanced",
+        "★★★★★ Professional"
+    ];
+    const desc = ranks[full + (half ? 1 : 0) - 1] || "";
 
     return `
-        <div class="stars" data-tooltip="Seit ${formatDuration(started)}">
-            ${'<span class="star full">★</span>'.repeat(fullStars)}
-            ${halfStar ? '<span class="star half">★</span>' : ''}
-            ${'<span class="star empty">☆</span>'.repeat(emptyStars)}
+        <div class="stars" data-tooltip="${formatDuration(started)}\n${desc}">
+            ${'★'.repeat(full)}
+            ${half ? '<span class="star half">★</span>' : ''}
+            ${'☆'.repeat(empty)}
         </div>
     `;
 }
@@ -157,16 +170,11 @@ function formatDuration(startDate) {
     const now = new Date();
     let years = now.getFullYear() - start.getFullYear();
     let months = now.getMonth() - start.getMonth();
-    if (months < 0) {
-        years--;
-        months += 12;
-    }
-    return years > 0
-        ? `${years} Jahr${years > 1 ? "e" : ""}`
-        : `${months} Monat${months > 1 ? "e" : ""}`;
+    if (months < 0) { years--; months += 12; }
+    return years > 0 ? `${years} Jahr${years > 1 ? "e" : ""}` : `${months} Monat${months > 1 ? "e" : ""}`;
 }
 
-// === Age Calculation ===
+// === Age ===
 function calculateAge(birthDateStr = "2006-02-17") {
     const birth = new Date(birthDateStr);
     const now = new Date();
@@ -176,41 +184,41 @@ function calculateAge(birthDateStr = "2006-02-17") {
     $("#alter").textContent = age;
 }
 
-// === Gallery Handling ===
+// === Gallery ===
 async function loadGallery(category) {
     try {
-        const response = await fetch("gallery/photos.json");
-        const images = await response.json();
+        const images = await (await fetch("gallery/photos.json")).json();
         const gallery = $(".gallery");
         gallery.innerHTML = "";
-
-        const selectedImages = images[category] || [];
-        selectedImages.forEach(filename => {
+        (images[category] || []).forEach(filename => {
             const img = document.createElement("img");
-            img.src = `gallery/${filename}`;
-            img.alt = `${category} Photo`;
-            img.className = "gallery-photo";
+            Object.assign(img, {
+                src: `gallery/${filename}`,
+                alt: `${category} Photo`,
+                className: "gallery-photo",
+                loading: "lazy"
+            });
             gallery.appendChild(img);
         });
-    } catch (error) {
-        console.error("Fehler beim Laden der Galerie:", error);
+    } catch (err) {
+        console.error("Fehler beim Laden der Galerie:", err);
     }
 }
 
 function setupGallery() {
     window.addEventListener("DOMContentLoaded", () => {
-        const activeGallery = localStorage.getItem("activeGalleryCategory") || "photography";
-        updateGalleryButtons(activeGallery);
-        loadGallery(activeGallery);
+        const active = localStorage.getItem("activeGalleryCategory") || "photography";
+        updateGalleryButtons(active);
+        loadGallery(active);
     });
 
     $$(".nav-btn").forEach(btn => {
         btn.addEventListener("click", () => {
             removeClassFromAll($$(".nav-btn"), "selected");
             btn.classList.add("selected");
-            const category = btn.dataset.category;
-            localStorage.setItem("activeGalleryCategory", category);
-            loadGallery(category);
+            const cat = btn.dataset.category;
+            localStorage.setItem("activeGalleryCategory", cat);
+            loadGallery(cat);
         });
     });
 }
@@ -221,7 +229,7 @@ function updateGalleryButtons(activeCategory) {
     );
 }
 
-// === Section Highlighting on Scroll ===
+// === Scroll Spy & Progress ===
 function setupScrollObserver() {
     const navLinks = $$(".nav-link");
     const sections = $$("section");
@@ -230,12 +238,12 @@ function setupScrollObserver() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const id = `#${entry.target.id}`;
-                navLinks.forEach(link => {
-                    link.classList.toggle("active", link.getAttribute("href") === id);
-                });
+                navLinks.forEach(link =>
+                    link.classList.toggle("active", link.getAttribute("href") === id)
+                );
             }
         });
-    }, { threshold: 0.1 }); // Kleinerer Schwellenwert für Mobile
+    }, { threshold: 0.1 });
 
     sections.forEach(section => observer.observe(section));
 
@@ -244,21 +252,18 @@ function setupScrollObserver() {
             removeClassFromAll(navLinks, "active");
             navLinks[0]?.classList.add("active");
         }
-
-        const scrollBar = document.getElementById('scroll-progress');
-        const scrollTop = window.scrollY;
-        const docHeight = document.body.scrollHeight - window.innerHeight;
-        const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-        scrollBar.style.width = scrollPercent + '%';
+        const scrollBar = $("#scroll-progress");
+        const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+        scrollBar.style.width = `${scrollPercent || 0}%`;
     });
 }
 
-// === Initialization ===
+// === Init ===
 document.addEventListener("DOMContentLoaded", () => {
-    loadProjects()
     setupNavigation();
     setupGallery();
     setupScrollObserver();
+    loadProjects();
     loadSkills();
     calculateAge();
 });

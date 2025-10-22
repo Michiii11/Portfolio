@@ -2,8 +2,9 @@
   "programming": [
     {
       "title": "Flag Game",
-      "short_description": "learning flags",
+      "short_description": "learn all flags and capitals of the world",
       "img": "assets/flag-game.png",
+      "color": "#ff5233",
       "links": [
         {
           "name": "Code &lt;/&gt;",
@@ -17,8 +18,9 @@
     },
     {
       "title": "ITN Rechner",
-      "short_description": "calculate your ITN",
+      "short_description": "calculate your ITN for your tennis games",
       "img": "assets/itn-rechner.png",
+      "color": "#e54d00",
       "links": [
         {
           "name": "Code &lt;/&gt;",
@@ -31,8 +33,10 @@
       ]
     },
     {
-      "title": "Reservierungssystem",
+      "title": "Reservationsystem",
+      "short_description": "reservation of community rooms",
       "img": "assets/reservationssystem.png",
+      "color": "#005cbb",
       "links": [
         {
             "name": "Visit it &rarr;",
@@ -42,8 +46,9 @@
     },
     {
       "title": "Easy Learning",
-      "short_description": "learning app",
+      "short_description": "create and learn through cards and typing",
       "img": "assets/easy-learning.png",
+      "color": "#dbdfe7",
       "links": [
         {
           "name": "Code &lt;/&gt;",
@@ -57,8 +62,9 @@
     },
     {
       "title": "Chess",
-      "short_description": "play chess",
+      "short_description": "coded chess game with plain JS from scratch",
       "img": "assets/chess.png",
+      "color": "#fffcf7",
       "links": [
         {
           "name": "Code &lt;/&gt;",
@@ -72,8 +78,9 @@
     },
     {
       "title": "Tetris",
-      "short_description": "classic tetris game",
+      "short_description": "created my own Tetris game with JS from scratch",
       "img": "assets/tetris.png",
+      "color": "#00ab51",
       "links": [
         {
           "name": "Code &lt;/&gt;",
@@ -91,6 +98,7 @@
       "title": "NO TOMORROW",
       "short_description": "time paradox movie",
       "img": "assets/notomorrow.jpg",
+      "color": "#51464a",
       "link": {
         "name": "Watch it &rarr;",
         "url": "https://www.youtube.com/watch?v=qDVY-5UF4PY&t=6s"
@@ -100,6 +108,7 @@
       "title": "REVENGE",
       "short_description": "action short film",
       "img": "assets/revenge.jpg",
+      "color": "#3e4183",
       "link": {
         "name": "Watch it &rarr;",
         "url": "https://www.youtube.com/watch?v=Z6PDqlk2Nf8"
@@ -109,6 +118,7 @@
       "title": "Der Geisterjäger",
       "short_description": "thriller short film",
       "img": "assets/geisterjäger.jpg",
+      "color": "#f1a22f",
       "link": {
         "name": "Watch it &rarr;",
         "url": "https://www.youtube.com/watch?v=hUkpiqK9Qis&t=50s"
@@ -116,7 +126,9 @@
     },
     {
       "title": "Lego Stop Motion",
+      "short_description": "fun and short lego animation",
       "img": "assets/stopmotion.jpg",
+      "color": "#26782c",
       "link": {
         "name": "Watch it &rarr;",
         "url": "https://www.youtube.com/watch?v=D0YVtJUaNP4"
