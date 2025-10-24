@@ -46,7 +46,9 @@ function handleProjectClick(event, url) {
 function renderProjects(projects) {
     return projects.map(project => {
         const { color, img, title, short_description, links, link } = project;
-        const rgbaColor = color ? `rgba(${hexToRgb(color)}, 0.5)` : `rgba(240,240,240,0.18)`;
+        const rgbaColor = color
+            ? `rgba(${hexToRgb(color)}, 0.5)`
+            : `rgba(240,240,240,0.18)`;
         const targetUrl = Array.isArray(links) && links.length
             ? links[links.length - 1].url
             : link?.url || "#";
@@ -56,11 +58,16 @@ function renderProjects(projects) {
             : `<a href="${link?.url || "#"}" target="_blank">${link?.name || "See more →"}</a>`;
 
         return `
-            <div class="project" 
+            <div class="project skeleton"
                  data-color="${color || ''}" 
                  style="--project-shadow: ${rgbaColor};"
                  onclick="handleProjectClick(event, '${targetUrl}')">
-                <img src="${addFallbackImage(img)}" loading="lazy" alt="${title}">
+                <img 
+                    data-src="${addFallbackImage(img)}" 
+                    alt="${title}" 
+                    title="${title}" 
+                    class="project-img" 
+                    loading="lazy">
                 <div>
                     <p>${title}</p>
                     <p class="description">- ${short_description}</p>
@@ -71,6 +78,42 @@ function renderProjects(projects) {
     }).join("");
 }
 
+function initProjectLazyLoading() {
+    const allImgs = document.querySelectorAll(".project-img");
+    const preloadCount = 3; // z. B. 3 Projekte sofort laden
+
+    // 🔹 Erste paar Projekte sofort laden
+    allImgs.forEach((img, index) => {
+        if (index < preloadCount) {
+            img.src = img.dataset.src;
+            img.onload = () => {
+                img.closest(".project").classList.remove("skeleton");
+                img.classList.add("loaded");
+            };
+        }
+    });
+
+    // 🔹 Rest Lazy-Loaden mit IntersectionObserver
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (!img.src) {
+                    img.src = img.dataset.src;
+                    img.onload = () => {
+                        img.closest(".project").classList.remove("skeleton");
+                        img.classList.add("loaded");
+                    };
+                }
+                observer.unobserve(img);
+            }
+        });
+    });
+
+    allImgs.forEach(img => observer.observe(img));
+}
+
+
 function renderLimitedProjects(projects, container, button) {
     let isExpanded = false;
 
@@ -78,6 +121,7 @@ function renderLimitedProjects(projects, container, button) {
         button.style.display = projects.length <= maxVisible ? "none" : "block";
         const visible = isExpanded ? projects : projects.slice(0, maxVisible);
         container.innerHTML = renderProjects(visible);
+        initProjectLazyLoading();
         button.textContent = isExpanded ? "Weniger anzeigen" : "Mehr anzeigen";
     };
 
@@ -122,18 +166,70 @@ async function loadSkills() {
                 </div>
             </div>
         `).join("");
+
+        // ⬇️ Hier HTML einfügen
         $(".skills-container").innerHTML = html;
+
+        // ⬇️ Und JETZT Lazy Loading initialisieren!
+        initSkillLazyLoading();
+
     } catch (err) {
         console.error("Fehler beim Laden der Skills:", err);
     }
 }
 
+
+function initSkillLazyLoading() {
+    const allIcons = document.querySelectorAll(".skill-icon");
+    const preloadCount = 5; // z. B. erste 5 direkt laden
+
+    // 🔹 Erste paar Skills direkt laden
+    allIcons.forEach((img, index) => {
+        if (index < preloadCount) {
+            img.src = img.dataset.src;
+            img.onload = () => {
+                img.closest(".skill-inner").classList.remove("skeleton");
+                img.classList.add("loaded");
+            };
+        }
+    });
+
+    // 🔹 Rest Lazy Loaden mit Observer
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (!img.src) {
+                    img.src = img.dataset.src;
+                    img.onload = () => {
+                        img.closest(".skill-inner").classList.remove("skeleton");
+                        img.classList.add("loaded");
+                    };
+                }
+                observer.unobserve(img);
+            }
+        });
+    });
+
+    allIcons.forEach(img => observer.observe(img));
+}
+
+
 function renderSkill(skill) {
     const { icon, name, skills, started } = skill;
+    const safeIcon = addFallbackImage(icon);
     return `
         <div class="skill" data-started="${started}">
-            <div class="skill-inner">
-                <div><img src="${addFallbackImage(icon)}" title="${name}" loading="lazy"></div>
+            <div class="skill-inner skeleton">
+                <div>
+                    <img 
+                        data-src="${safeIcon}" 
+                        alt="${name}" 
+                        title="${name}" 
+                        class="skill-icon" 
+                        loading="lazy"
+                    >
+                </div>
                 <p>${name}</p>
                 <div class="stars">${renderStars(skills, started)}</div>
             </div>
@@ -158,7 +254,6 @@ function renderStars(rating, started) {
     return `
         <div class="stars" data-tooltip="${formatDuration(started)}\n${desc}">
             ${'★'.repeat(full)}
-            ${half ? '<span class="star half">★</span>' : ''}
             ${'☆'.repeat(empty)}
         </div>
     `;
@@ -187,19 +282,57 @@ function calculateAge(birthDateStr = "2006-02-17") {
 // === Gallery ===
 async function loadGallery(category) {
     try {
-        const images = await (await fetch("gallery/photos.json")).json();
-        const gallery = $(".gallery");
+        const response = await fetch("gallery/photos.json");
+        const images = await response.json();
+        const gallery = document.querySelector(".gallery");
         gallery.innerHTML = "";
-        (images[category] || []).forEach(filename => {
+
+        const files = images[category] || [];
+
+        // 🔹 Anzahl der Bilder, die direkt vorgeladen werden sollen
+        const preloadCount = 3;
+
+        // 🔹 Skeleton-Container + Lazy Loading Setup
+        files.forEach((filename, index) => {
+            const wrapper = document.createElement("div");
+            wrapper.className = "photo-wrapper skeleton";
+
             const img = document.createElement("img");
-            Object.assign(img, {
-                src: `gallery/${filename}`,
-                alt: `${category} Photo`,
-                className: "gallery-photo",
-                loading: "lazy"
-            });
-            gallery.appendChild(img);
+            img.dataset.src = `gallery/${filename}`;
+            img.alt = `${category} Photo`;
+            img.className = "gallery-photo";
+            if (index < preloadCount) {
+                // Preload die ersten paar Bilder sofort
+                img.src = img.dataset.src;
+                img.onload = () => {
+                    img.parentElement.classList.remove("skeleton");
+                    img.classList.add("loaded");
+                };
+            }
+
+            wrapper.appendChild(img);
+            gallery.appendChild(wrapper);
         });
+
+        // 🔹 Lazy Loading mit IntersectionObserver
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (!img.src) {
+                        img.src = img.dataset.src;
+                        img.onload = () => {
+                            img.parentElement.classList.remove("skeleton");
+                            img.classList.add("loaded");
+                        };
+                    }
+                    observer.unobserve(img);
+                }
+            });
+        });
+
+        document.querySelectorAll(".gallery-photo").forEach(img => observer.observe(img));
+
     } catch (err) {
         console.error("Fehler beim Laden der Galerie:", err);
     }

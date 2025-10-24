@@ -628,5 +628,14 @@ section .nav div:hover {
     display: none;
   }
 }
+.photo-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+.photo-wrapper:hover {
+  transform: scale(1.05);
+}
 
 /*# sourceMappingURL=index.css.map */
