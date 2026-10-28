@@ -1,6 +1,18 @@
 {
   "programming": [
     {
+      "title": "Teacher Helper",
+      "short_description": "collect your examples and tests",
+      "img": "assets/teacher-helper.png",
+      "color": "#17213B",
+      "links": [
+        {
+          "name": "Try it out &rarr;",
+          "url": "https://teacher-helper-frontend-production-346197888787.europe-west1.run.app/"
+        }
+      ]
+    },
+    {
       "title": "Flag Game",
       "short_description": "learn all flags and capitals of the world",
       "img": "assets/flag-game.png",
@@ -39,8 +51,8 @@
       "color": "#005cbb",
       "links": [
         {
-            "name": "Visit it &rarr;",
-            "url": "https://reservation-frontend-159013301993.europe-west1.run.app/calendar"
+          "name": "Visit it &rarr;",
+          "url": "https://reservation-frontend-159013301993.europe-west1.run.app/calendar"
         }
       ]
     },

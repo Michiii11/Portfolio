@@ -23,10 +23,10 @@ section, header {
   height: 4px;
   width: 0;
   background: linear-gradient(
-                  90deg,
-                  lighten($accent, 20%),
-                  $accent,
-                  darken($accent, 15%)
+          90deg,
+          lighten($accent, 20%),
+          $accent,
+          darken($accent, 15%)
   );
   border-radius: 2px;
   transition: width 0.2s;
@@ -434,8 +434,30 @@ section{
   white-space: pre-line;
 }
 
-.stars:hover::after {
+.stars:hover::after,
+.stars:focus-visible::after {
   opacity: 1;
+}
+
+// Skills with an ended date stay in the portfolio but have a fixed duration.
+.skill-ended {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  padding: .25rem .6rem;
+  border-radius: 999px;
+  background: $gray300;
+  color: $gray600;
+  border: 1px solid rgba(166, 166, 166, .18);
+  font-size: .75rem;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.skill-inactive .skill-inner > p {
+  color: $gray600;
 }
 
 .skill .stars {

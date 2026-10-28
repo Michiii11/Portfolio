@@ -36,13 +36,15 @@
         "name": "Node JS",
         "started": "09-2021",
         "skills": 2,
-        "icon": "logos/nodejs.png"
+        "icon": "logos/nodejs.png",
+        "ended": "09-2022"
       },
       {
         "name": "PHP",
         "started": "09-2022",
         "skills": 2,
-        "icon": "logos/php.png"
+        "icon": "logos/php.png",
+        "ended": "09-2023"
       },
       {
         "name": "SQL",
@@ -70,8 +72,14 @@
       {
         "name": "Quarkus",
         "started": "09-2023",
-        "skills": 5,
+        "skills": 4,
         "icon": "logos/quarkus.png"
+      },
+      {
+        "name": "C++",
+        "started": "08-2026",
+        "skills": 2,
+        "icon": "logos/c++.png"
       },
       {
         "name": "Docker",
@@ -94,25 +102,29 @@
         "name": "Photoshop",
         "started": "09-2020",
         "skills": 4,
-        "icon": "logos/photoshop.png"
+        "icon": "logos/photoshop.png",
+        "ended": "09-2026"
       },
       {
         "name": "Illustrator",
         "started": "09-2023",
         "skills": 2,
-        "icon": "logos/illustrator.png"
+        "icon": "logos/illustrator.png",
+        "ended": "09-2025"
       },
       {
         "name": "Lightroom",
         "started": "09-2024",
         "skills": 3,
-        "icon": "logos/lightroom.png"
+        "icon": "logos/lightroom.png",
+        "ended": "09-2025"
       },
       {
         "name": "After Effects",
         "started": "09-2021",
         "skills": 2,
-        "icon": "logos/aftereffects.png"
+        "icon": "logos/aftereffects.png",
+        "ended": "09-2025"
       },
       {
         "name": "Premiere Pro",
@@ -124,7 +136,8 @@
         "name": "Audition",
         "started": "09-2022",
         "skills": 3,
-        "icon": "logos/audition.png"
+        "icon": "logos/audition.png",
+        "ended": "09-2025"
       },
       {
         "name": "Davinci Resolve",
@@ -136,7 +149,8 @@
         "name": "Cinema 4D",
         "started": "09-2023",
         "skills": 3,
-        "icon": "logos/cinema4d.png"
+        "icon": "logos/cinema4d.png",
+        "ended": "09-2025"
       }
     ]
   }

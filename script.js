@@ -216,7 +216,7 @@ function initSkillLazyLoading() {
 
 
 function renderSkill(skill) {
-    const { icon, name, skills, started } = skill;
+    const { icon, name, skills, started, ended } = skill;
     const safeIcon = addFallbackImage(icon);
     return `
         <div class="skill" data-started="${started}">
@@ -231,13 +231,13 @@ function renderSkill(skill) {
                     >
                 </div>
                 <p>${name}</p>
-                <div class="stars">${renderStars(skills, started)}</div>
+                <div class="stars">${renderStars(skills, started, ended)}</div>
             </div>
         </div>
     `;
 }
 
-function renderStars(rating, started) {
+function renderStars(rating, started, ended) {
     const full = Math.floor(rating);
     const half = rating % 1 !== 0;
     const empty = 5 - full - (half ? 1 : 0);
@@ -252,19 +252,25 @@ function renderStars(rating, started) {
     const desc = ranks[full + (half ? 1 : 0) - 1] || "";
 
     return `
-        <div class="stars" data-tooltip="${formatDuration(started)}\n${desc}">
+        <div class="stars" data-tooltip="${formatDuration(started, ended)}\n${desc}">
             ${'★'.repeat(full)}
             ${'☆'.repeat(empty)}
         </div>
     `;
 }
 
-function formatDuration(startDate) {
+function formatDuration(startDate, endDate) {
     const [month, year] = startDate.split("-").map(Number);
     const start = new Date(year, month - 1);
-    const now = new Date();
-    let years = now.getFullYear() - start.getFullYear();
-    let months = now.getMonth() - start.getMonth();
+    // Ohne Enddatum bleibt die Dauer fortlaufend, mit Enddatum wird sie eingefroren.
+    const end = endDate
+        ? (() => {
+            const [endMonth, endYear] = endDate.split("-").map(Number);
+            return new Date(endYear, endMonth - 1);
+        })()
+        : new Date();
+    let years = end.getFullYear() - start.getFullYear();
+    let months = end.getMonth() - start.getMonth();
     if (months < 0) { years--; months += 12; }
     return years > 0 ? `${years} Jahr${years > 1 ? "e" : ""}` : `${months} Monat${months > 1 ? "e" : ""}`;
 }
